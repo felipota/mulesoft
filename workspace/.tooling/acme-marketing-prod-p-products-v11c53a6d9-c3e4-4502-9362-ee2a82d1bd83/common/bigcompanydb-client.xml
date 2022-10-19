@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<sub-flow name="bigcompanydb-client-products-get" doc:id="040fd1f8-fc8d-4a19-9e7f-0b237cc78817" >
+		<until-successful maxRetries="5" doc:name="Until Successful" doc:id="44f53b2f-db53-43eb-84b1-a13f459ab6a3" >
+			<try doc:name="Try" doc:id="d31fb5e8-872c-4c5b-a3e6-9d7f3da8d278" >
+				<http:request method="GET" doc:name="Request" doc:id="3084ee80-1013-4599-8cc6-59c999a6b3fd" config-ref="HTTP_Request_configuration_bigcompanydb" path="${big-company-db.resources.products}"/>
+				<error-handler >
+					<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="1f0f70ff-10a1-43e7-ac9d-aa76a062eb3e" type="HTTP:SERVICE_UNAVAILABLE, HTTP:TOO_MANY_REQUESTS"/>
+				</error-handler>
+			</try>
+		</until-successful>
+	</sub-flow>
+</mule>

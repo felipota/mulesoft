@@ -1,0 +1,49 @@
+%dw 2.0
+
+type auto_fa6000ec_0698_45cd_9bfc_485c7a491bfb_Input_Payload = {|
+  "0": org_mule_runtime_api_message_Message, 
+  "1": org_mule_runtime_api_message_Message_8
+|}
+type org_mule_runtime_api_message_Message_8 = {|
+  payload: Any, 
+  attributes: com_mulesoft_extension_mq_api_attributes_AnypointMQMessageAttributes_9
+|} {"typeId": "org.mule.runtime.api.message.Message"}
+type com_mulesoft_extension_mq_api_attributes_AnypointMQMessageAttributes_9 = {|
+  destination: String, 
+  headers: { _?: java_lang_Object_12 }, 
+  properties: { _?: java_lang_Object_12 }, 
+  messageId: String, 
+  deliveryCount: Number, 
+  contentType?: String, 
+  ackToken?: String
+|} {"typeAlias": "AnypointMQMessageAttributes",
+"typeId": "com.mulesoft.extension.mq.api.attributes.AnypointMQMessageAttributes"}
+type java_lang_Object_12 = java_lang_Object_12
+
+
+
+
+
+
+type org_mule_runtime_api_message_Message = {|
+  payload: Any, 
+  attributes: com_mulesoft_extension_mq_api_attributes_AnypointMQMessageAttributes
+|} {"typeId": "org.mule.runtime.api.message.Message"}
+type com_mulesoft_extension_mq_api_attributes_AnypointMQMessageAttributes = {|
+  destination: String, 
+  headers: { _?: java_lang_Object }, 
+  properties: { _?: java_lang_Object }, 
+  messageId: String, 
+  deliveryCount: Number, 
+  contentType?: String, 
+  ackToken?: String
+|} {"typeAlias": "AnypointMQMessageAttributes",
+"typeId": "com.mulesoft.extension.mq.api.attributes.AnypointMQMessageAttributes"}
+type java_lang_Object = java_lang_Object
+
+
+
+
+
+
+

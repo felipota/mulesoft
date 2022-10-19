@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="elasticsearch-client-suite.xml" />
+	<munit:test name="sf-elasticsearch-client-products-get-test" doc:id="10292e8a-75b1-4106-9874-b89820ea6e3d" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Request" doc:id="b15b30a0-afa5-4940-9763-6edd53f95ac0" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="e98029e7-a736-47e0-a99f-43b6e00d5f02" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json  --- readUrl('classpath://sfelasticsearchclientproductsgettest\mock_payload.dwl')]" mediaType="application/json " encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://sfelasticsearchclientproductsgettest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://sfelasticsearchclientproductsgettest\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="ec93d4a2-c5e4-44fe-a577-fcf7ddc636c1" >
+				<munit:payload value="#[readUrl('classpath://sfelasticsearchclientproductsgettest\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://sfelasticsearchclientproductsgettest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://sfelasticsearchclientproductsgettest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to sf-elasticsearch-client-products-get" doc:id="f8f6ba26-0456-4d35-8c26-db3d0cf9f7a6" name="sf-elasticsearch-client-products-get"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="153b2453-85de-4fea-b8d0-f59af85391b0" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import sfelasticsearchclientproductsgettest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="sf-elasticsearch-client-poducts-post-test" doc:id="061bb178-06b2-4681-b70c-08cfbe283c37" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Request" doc:id="7f06feff-e160-4139-8acd-a9a7da662bfd" processor="http:request">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="082986e3-a75b-4471-99b3-a2dd818ee324" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json  --- readUrl('classpath://sfelasticsearchclientpoductsposttest\mock_payload.dwl')]" mediaType="application/json " encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://sfelasticsearchclientpoductsposttest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="notification" value="#[output application/java --- readUrl('classpath://sfelasticsearchclientpoductsposttest\mock_variable_.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="2401bf89-da90-4940-943d-b70516214e9c" >
+				<munit:payload value="#[output application/json  --- readUrl('classpath://sfelasticsearchclientpoductsposttest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json " />
+				<munit:attributes value="#[readUrl('classpath://sfelasticsearchclientpoductsposttest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="notification" value="#[output application/java --- readUrl('classpath://sfelasticsearchclientpoductsposttest\set-event_variable_.dwl')]" encoding="UTF-8" mediaType="application/java" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to sf-elasticsearch-client-poducts-post" doc:id="7c175164-296f-4503-96c3-b682dc5a6255" name="sf-elasticsearch-client-poducts-post"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="7f47bc20-1399-41f9-96c1-b028ebaeffff" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import sfelasticsearchclientpoductsposttest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

@@ -1,0 +1,24 @@
+%dw 2.0
+
+type auto_a4606a76_8ece_42d3_b119_481915490e86_Input_Payload = Array<{  offers: {|    priceValidUntil: String,     priceCurrency: String,     "@type": String,     price: String,     availability: String,     url: String,     itemCondition: String  |} {"label": "Offers"},   image: Array<String>, 
+  "@type": String, 
+  description: String, 
+  mpn: String, 
+  "@context": String, 
+  name: String, 
+  id: String, 
+  sku: String, 
+  aggregateRating: {|
+    reviewCount: String, 
+    "@type": String, 
+    ratingValue: String
+  |} {"label": "AggregateRating"}, 
+  brand: {|
+    "@type": String, 
+    name: String
+  |} {"label": "Brand"}, 
+  AdditionalProperty?: { _?: Any } {"label": "AdditionalProperty"}, 
+  status: String, 
+  _?: Any
+} {"label": "Product"}>
+

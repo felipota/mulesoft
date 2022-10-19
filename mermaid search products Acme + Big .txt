@@ -1,0 +1,31 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize' : '50px', 'fontFamily' : 'Helvetica', 'noteBorderColor' : '#4D829E','noteBkgColor' : '#FFFFFF', 'noteTextColor' : '#827b77', 'labelTextColor' : '#827b77','actorBkg': '#ffffff', 'actorBorder' : '#009edb', 'actorTextColor' : '#827b77', 'activationBkgColor' : '#009edb', 'activationBorderColor' : '#827b77', 'signalColor' : '#827b77', 'signalTextColor' : '#827b77', 'loopTextColor' : '#827b77'}}}%%
+
+sequenceDiagram
+    autonumber
+    actor user
+    participant webapp as Products Web Application
+    participant products_API as products API
+    participant eslasticsearch_query_API as Elastic Search API
+    participant elasticSearch as Elastic Search
+    participant products_BIG_API as Big Company DB API
+    participant bigCompanyDB as Big compány Database
+
+    user ->>+ webapp:  Searches for products
+    webapp ->>+ products_API: http /products[GET]
+    par Elasti search
+        products_API ->>+ eslasticsearch_query_API: http /products/match[GET]
+        eslasticsearch_query_API ->>+ elasticSearch : Query
+        elasticSearch -->>- eslasticsearch_query_API : Result
+        eslasticsearch_query_API -->>- products_API: Status code 200 [Product[]]
+    and Big Company
+        products_API ->>+ products_BIG_API: http /products/match[GET]
+        products_BIG_API ->>+ bigCompanyDB : Query
+        bigCompanyDB -->>- products_BIG_API : Result
+        products_BIG_API -->>- products_API: Status code 200 [Product[]]
+    end
+    products_API --> products_API : merge results
+    products_API -->>- webapp: Status code 200 [Product[]]
+    webapp -->>- user: Display products
+
+			
+			

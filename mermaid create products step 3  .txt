@@ -1,0 +1,20 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize' : '50px', 'fontFamily' : 'Helvetica', 'noteBorderColor' : '#4D829E','noteBkgColor' : '#FFFFFF', 'noteTextColor' : '#827b77', 'labelTextColor' : '#827b77','actorBkg': '#ffffff', 'actorBorder' : '#009edb', 'actorTextColor' : '#827b77', 'activationBkgColor' : '#009edb', 'activationBorderColor' : '#827b77', 'signalColor' : '#827b77', 'signalTextColor' : '#827b77', 'loopTextColor' : '#827b77'}}}%%
+sequenceDiagram
+    autonumber
+
+    actor Legal
+    participant webapp as Products Web Backoffice
+    participant products_API as products API
+    participant queue as Products managment queue
+
+    participant queue as Products managment queue
+
+        Legal ->>+ webapp : Approves a new product
+        note right of Legal : it can also be <br>update or deletion
+        webapp ->>+ products_API: http /products[Patch]<br>[Product]
+                note right of Legal : Ideally a product is created <br>with a status which is not <br>shown to the public, <br>in this process this<br> status is updated.it can <br>also works for update <br>or deletion
+
+        products_API -->>+ queue: publish [product]
+        queue -->>- products_API: published
+        products_API -->>- webapp: Status code 201
+        webapp -->>- Legal : Displays process sent

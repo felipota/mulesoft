@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<sub-flow name="sf-email-client-send-post" doc:id="fa6000ec-0698-45cd-9bfc-485c7a491bfb" >
+		<until-successful maxRetries="5" doc:name="Until Successful" doc:id="4bd3c0e7-a282-4e5b-a3c3-662d635bb663" >
+			<try doc:name="Try" doc:id="4ef204b5-1201-4756-a0b3-25777130f864" >
+				<http:request method="POST" doc:name="Request" doc:id="3d28999e-aec4-4bce-9932-225f08b71076" config-ref="HTTP_Request_configuration_email" path="${email.resource.send}"/>
+				<error-handler >
+					<on-error-propagate enableNotifications="true" logException="true" doc:name="Copy_of_On Error Propagate" doc:id="0f7d4aef-d61f-4f70-94d7-f97dabfeef9f" type="HTTP:SERVICE_UNAVAILABLE, HTTP:TOO_MANY_REQUESTS" />
+				</error-handler>
+			</try>
+		</until-successful>
+	</sub-flow>
+</mule>

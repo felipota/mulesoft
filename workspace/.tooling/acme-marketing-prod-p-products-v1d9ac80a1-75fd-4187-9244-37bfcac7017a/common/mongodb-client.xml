@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<sub-flow name="sf-mongodb-client-products-post" doc:id="854d025e-ad24-4412-8494-223035226ca8" >
+		<until-successful maxRetries="5" doc:name="Until Successful" doc:id="a86ea27c-1a3c-4b08-9f4c-cb6435f57b99" >
+			<try doc:name="Try" doc:id="15955972-9bc5-4c9f-ba7a-6607bbd82531" >
+				<http:request method="POST" doc:name="Request" doc:id="fc56dd8d-a5d8-493e-9c5e-0045afa7becb" config-ref="HTTP_Request_configuration_mongodb" path="${mongo-db.resources.products}"/>
+				<error-handler >
+					<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="0ece1aa7-db3b-46ab-8e68-d496d4fcdc44" type="HTTP:SERVICE_UNAVAILABLE, HTTP:TOO_MANY_REQUESTS" />
+				</error-handler>
+			</try>
+		</until-successful>
+	</sub-flow>
+</mule>

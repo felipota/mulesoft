@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:anypoint-mq="http://www.mulesoft.org/schema/mule/anypoint-mq"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:cluster="http://www.mulesoft.org/schema/mule/ee/cluster"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/anypoint-mq http://www.mulesoft.org/schema/mule/anypoint-mq/current/mule-anypoint-mq.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="4fe6881c-e62c-4209-ad60-5117aa986aa7" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<configuration doc:name="Configuration" doc:id="6d71001a-0604-4464-b906-ccf5f46f1dfd" defaultErrorHandler-ref="mf-common-error-handler" >
+	</configuration>
+	<http:request-config name="HTTP_Request_configuration_elasticsearch" doc:name="HTTP Request configuration" doc:id="00d814a3-87aa-4a73-9e70-f1994394ce4a" basePath="${elastic-search.basepath}" sendCorrelationId="ALWAYS">
+		<http:request-connection host="${elastic-search.host}" port="${elastic-search.port}" />
+	</http:request-config>
+	<http:request-config name="HTTP_Request_configuration_bigcompanydb" doc:name="HTTP Request configuration" doc:id="296dceaf-1883-42e5-9597-785c9f5fc483" basePath="${big-company-db.basepath}" sendCorrelationId="ALWAYS">
+		<http:request-connection host="${big-company-db.host}" port="${big-company-db.port}" />
+	</http:request-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="e68ff74b-04a1-4205-8919-0136845a626f" file="properties\config-${env}.yaml" />
+	<global-property doc:name="Global Property" doc:id="36dad1c9-4090-44b0-9a92-3b60a3647804" name="env" value="dev" />
+	<http:listener-config name="acme-marketing-prod-p-products-v1-httpListenerConfig">
+        <http:listener-connection host="0.0.0.0" port="8082" />
+    </http:listener-config>
+    <apikit:config name="acme-marketing-prod-p-products-v1-config" api="resource::277d4376-34a4-424a-97b6-6603b75f407d:acme-marketing-prod-p-products-v1:1.0.0:raml:zip:acme-marketing-prod-p-products-v1.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+	<anypoint-mq:config name="Anypoint_MQ_Config" doc:name="Anypoint MQ Config" doc:id="4c286e4b-f507-4a06-b7ba-2fc52b9d8930" >
+		<anypoint-mq:connection url="${acme-products-queue.host}" clientId="${acme-products-queue.client}" clientSecret="${acme-products-queue.secret}" />
+	</anypoint-mq:config>
+	<http:request-config name="HTTP_Request_configuration_mongodb" doc:name="HTTP Request configuration" doc:id="3a0539f7-2ff8-45f8-bc8a-b6ceafd8e27c" basePath="${mongo-db.basepath}" >
+		<http:request-connection host="${mongo-db.host}" port="${mongo-db.port}" />
+	</http:request-config>
+	<http:request-config name="HTTP_Request_configuration_email" doc:name="HTTP Request configuration" doc:id="9871d188-48ec-410a-9786-30778972424c" basePath="${email.basepath}" >
+		<http:request-connection host="${email.host}" port="${email.port}" />
+	</http:request-config>
+</mule>

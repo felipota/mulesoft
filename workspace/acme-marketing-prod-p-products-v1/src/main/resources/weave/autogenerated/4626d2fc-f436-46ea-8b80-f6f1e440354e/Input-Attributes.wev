@@ -1,0 +1,23 @@
+%dw 2.0
+
+type auto_4626d2fc_f436_46ea_8b80_f6f1e440354e_Input_Attributes = {|
+  destination: String, 
+  headers: { _?: java_lang_Object }, 
+  properties: { _?: java_lang_Object_3 }, 
+  messageId: String, 
+  deliveryCount: Number, 
+  contentType?: String, 
+  ackToken?: String
+|} {"typeAlias": "AnypointMQMessageAttributes",
+"typeId": "com.mulesoft.extension.mq.api.attributes.AnypointMQMessageAttributes"}
+type java_lang_Object_3 = {|  |} {"typeAlias": "Object",
+"class": "java.lang.Object",
+"typeId": "java.lang.Object"}
+
+
+type java_lang_Object = {|  |} {"typeAlias": "Object",
+"class": "java.lang.Object",
+"typeId": "java.lang.Object"}
+
+
+

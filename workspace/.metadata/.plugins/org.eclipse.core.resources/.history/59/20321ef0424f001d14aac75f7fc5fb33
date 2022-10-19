@@ -1,0 +1,6 @@
+elastic-search:
+  host: "http://localhost:3000/acme-elasticsearch-v1"
+  port: "3000"
+  resources:
+    products: "/products"
+    

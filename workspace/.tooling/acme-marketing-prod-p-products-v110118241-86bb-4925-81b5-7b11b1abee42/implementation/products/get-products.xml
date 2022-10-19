@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<sub-flow name="get-products" doc:id="a4606a76-8ece-42d3-b119-481915490e86" >
+		<flow-ref doc:name="Flow Reference to sf-elasticsearch-client-products-get" doc:id="58d0a534-e7e9-4e60-bdc0-39f431aad95b" name="sf-elasticsearch-client-products-get"/>
+	</sub-flow>
+</mule>

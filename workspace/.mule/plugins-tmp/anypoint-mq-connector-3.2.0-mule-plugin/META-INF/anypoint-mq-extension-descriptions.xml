@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension-documentation>
+    <configs>
+        <config name="config">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="expirationPolicy">
+                    <description><![CDATA[Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit.]]></description>
+                </parameter>
+            </parameters>
+        </config>
+    </configs>
+    <connections>
+        <connection name="connection">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="url">
+                    <description><![CDATA[The region URL where the Queue resides. This URL can be obtained and configured from the Anypoint Platform &gt; MQ console. Copy/paste the region URL into this field."]]></description>
+                </parameter>
+                <parameter name="clientId">
+                    <description><![CDATA[In Anypoint Platform &gt; MQ &gt; Client Apps, click an app name (or create a new app) and click Copy for the Client App ID field. Paste this value in the Studio Client App ID field]]></description>
+                </parameter>
+                <parameter name="clientSecret">
+                    <description><![CDATA[In Anypoint Platform > MQ > Client Apps, click an app name (or create a new app) and click Copy for the Client Secret field. Paste this value in the Studio Client Secret field.]]></description>
+                </parameter>
+                <parameter name="tlsContextFactory">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="host">
+                    <description><![CDATA[Host where the proxy requests will be sent.]]></description>
+                </parameter>
+                <parameter name="port">
+                    <description><![CDATA[Port where the proxy requests will be sent.]]></description>
+                </parameter>
+                <parameter name="username">
+                    <description><![CDATA[The username to authenticate against the proxy.]]></description>
+                </parameter>
+                <parameter name="password">
+                    <description><![CDATA[The password to authenticate against the proxy.]]></description>
+                </parameter>
+                <parameter name="sendBufferSize">
+                    <description><![CDATA[The size of the buffer (in bytes) used when sending data, set on the socket itself.]]></description>
+                </parameter>
+                <parameter name="receiveBufferSize">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="clientTimeout">
+                    <description><![CDATA[This sets the SO_TIMEOUT value on sockets. Indicates the amount of time (in milliseconds) that the socket will wait in a blocking operation before failing. <p> A value of 0 (the default) means waiting indefinitely.]]></description>
+                </parameter>
+                <parameter name="sendTcpNoDelay">
+                    <description><![CDATA[If set, transmitted data is not collected together for greater efficiency but sent immediately. <p> Defaults to true even though Socket default is false because optimizing to reduce amount of network traffic over latency is hardly ever a concern today.]]></description>
+                </parameter>
+                <parameter name="linger">
+                    <description><![CDATA[This sets the SO_LINGER value. This is related to how long (in milliseconds) the socket will take to close so that any remaining data is transmitted correctly.]]></description>
+                </parameter>
+                <parameter name="keepAlive">
+                    <description><![CDATA[Enables SO_KEEPALIVE behavior on open sockets. This automatically checks socket connections that are open but unused for long periods and closes them if the connection becomes unavailable. <p> This is a property on the socket itself and is used by a server socket to control whether connections to the server are kept alive before they are recycled.]]></description>
+                </parameter>
+                <parameter name="connectionTimeout">
+                    <description><![CDATA[Number of milliseconds to wait until an outbound connection to a remote server is successfully created, before failing with a timeout. Defaults to 30 seconds.]]></description>
+                </parameter>
+                <parameter name="reconnection">
+                    <description><![CDATA[When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy]]></description>
+                </parameter>
+            </parameters>
+        </connection>
+    </connections>
+    <extension name="Anypoint MQ">
+        <description><![CDATA[Anypoint MQ is a multi-tenant, cloud messaging service that enables customers to perform advanced asynchronous messaging scenarios between their applications.]]></description>
+        <parameters/>
+    </extension>
+    <operations>
+        <operation name="ack">
+            <description><![CDATA[Executes an Acknowledgement indicating that the message has been consumed correctly and deletes the message from In Flight status.]]></description>
+            <parameters>
+                <parameter name="ackToken">
+                    <description><![CDATA[The `ackToken` of the message, which was received when message was consumed. `ackToken` will only be created when acknowledgementMode="MANUAL" is used.]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+        <operation name="consume">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="destination">
+                    <description><![CDATA[Queue or Exchange name from where to fetch a Message]]></description>
+                </parameter>
+                <parameter name="acknowledgementMode">
+                    <description><![CDATA[Acknowledgement mode to use for the messages retrieved.]]></description>
+                </parameter>
+                <parameter name="acknowledgementTimeout">
+                    <description><![CDATA[Duration that a message is held by a consumer waiting for an Acknowledgement or Not Acknowledgement. After that duration elapses, the message is again available to any consumer.]]></description>
+                </parameter>
+                <parameter name="acknowledgementTimeoutUnit">
+                    <description><![CDATA[Time unit to be used in the acknowledgementTimeout configuration]]></description>
+                </parameter>
+                <parameter name="pollingTime">
+                    <description><![CDATA[How much time to be waited if the requested messages are not ready to be consumed.]]></description>
+                </parameter>
+                <parameter name="pollingTimeUnit">
+                    <description><![CDATA[Time unit to be used in the pollingTime configuration]]></description>
+                </parameter>
+                <parameter name="outputMimeType">
+                    <description><![CDATA[The mime type of the payload that this operation outputs.]]></description>
+                </parameter>
+                <parameter name="outputEncoding">
+                    <description><![CDATA[The encoding of the payload that this operation outputs.]]></description>
+                </parameter>
+                <parameter name="streamingStrategy">
+                    <description><![CDATA[Configure if repeatable streams should be used and their behaviour]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+        <operation name="nack">
+            <description><![CDATA[Executes an Not Acknowledgement and change the status of the message from In Flight to In Queue to be consumed again for a subscriber]]></description>
+            <parameters>
+                <parameter name="ackToken">
+                    <description><![CDATA[The `ackToken` of the message, which was received when message was consumed. `ackToken` will only be created when acknowledgementMode="MANUAL" is used.]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+        <operation name="publish">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="destination">
+                    <description><![CDATA[Queue or Exchange name from where to fetch a Message]]></description>
+                </parameter>
+                <parameter name="outputMimeType">
+                    <description><![CDATA[The mime type of the payload that this operation outputs.]]></description>
+                </parameter>
+                <parameter name="outputEncoding">
+                    <description><![CDATA[The encoding of the payload that this operation outputs.]]></description>
+                </parameter>
+                <parameter name="streamingStrategy">
+                    <description><![CDATA[Configure if repeatable streams should be used and their behaviour]]></description>
+                </parameter>
+                <parameter name="body">
+                    <description><![CDATA[The body of the outgoing MQ Message, sent as a String as part of a JSON message. Any content that is published needs to be serializable to a String format that can be later deserialized from. One way to do so is to serialize the published Object to its JSON representation, which can be serialized/deserialized from a String easily. Sending Objects that don't have a proper string serialization will cause the message to be unreadable on the receiving end.]]></description>
+                </parameter>
+                <parameter name="properties">
+                    <description><![CDATA[The custom user properties that should be set to this Anypoint MQ Message]]></description>
+                </parameter>
+                <parameter name="messageId">
+                    <description><![CDATA[A custom ID for the outgoing Anypoint MQ Message. This value must be a proper UID for the message in order to avoid delivery problems. If absent, the broker will create one UUID for each message.]]></description>
+                </parameter>
+                <parameter name="messageGroupId">
+                    <description><![CDATA[The ID of the message group that the published message belongs to. Can only be specified for FIFO queues]]></description>
+                </parameter>
+                <parameter name="deliveryDelay">
+                    <description><![CDATA[The delay, that will be applied to this message before it is consumed. This value has to be in the range of 0 to 15 minutes. By default this value will be in MILLISECONDS.]]></description>
+                </parameter>
+                <parameter name="deliveryDelayUnit">
+                    <description><![CDATA[Time unit to be used in the deliveryDelay parameter configuration]]></description>
+                </parameter>
+                <parameter name="sendContentType">
+                    <description><![CDATA[Set to true if the body type should be sent as a Anypoint MQ Message property]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+    </operations>
+    <sources>
+        <source name="subscriber">
+            <description><![CDATA[Anypoint MQ Subscriber Message Source, retrieves messages from the given destination name.]]></description>
+            <parameters>
+                <parameter name="destination">
+                    <description><![CDATA[Name of the Queue from which messages will be retrieved.]]></description>
+                </parameter>
+                <parameter name="subscriberType">
+                    <description><![CDATA[The strategy to be used when subscribing for messages from the service]]></description>
+                </parameter>
+                <parameter name="acknowledgementMode">
+                    <description><![CDATA[Acknowledgement mode to use for the messages retrieved.]]></description>
+                </parameter>
+                <parameter name="acknowledgementTimeout">
+                    <description><![CDATA[The default acknowledgementTimeout for all the subscribers, unless it is overridden. Duration that a message is held by a broker waiting for an Acknowledgement or Not Acknowledgement. After that duration elapses, the message is again available to any subscriber.]]></description>
+                </parameter>
+                <parameter name="acknowledgementTimeoutUnit">
+                    <description><![CDATA[Time unit to be used in the acknowledgementTimeout configuration]]></description>
+                </parameter>
+                <parameter name="circuitBreaker">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="outputMimeType">
+                    <description><![CDATA[The mime type of the payload that this operation outputs.]]></description>
+                </parameter>
+                <parameter name="outputEncoding">
+                    <description><![CDATA[The encoding of the payload that this operation outputs.]]></description>
+                </parameter>
+                <parameter name="primaryNodeOnly">
+                    <description><![CDATA[Whether this source should only be executed on the primary node when runnning in Cluster]]></description>
+                </parameter>
+                <parameter name="streamingStrategy">
+                    <description><![CDATA[Configure if repeatable streams should be used and their behaviour]]></description>
+                </parameter>
+                <parameter name="redeliveryPolicy">
+                    <description><![CDATA[Defines a policy for processing the redelivery of the same message]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </source>
+    </sources>
+    <types>
+        <type name="com.mulesoft.extension.mq.api.attributes.AnypointMQMessageAttributes">
+            <description><![CDATA[Contains all the metadata of a consumed Anypoint MQ message.
+ It carries information such as the Headers, the Properties and the required ID for performing an ACK on the Message.
+
+ @since 3.0]]></description>
+            <parameters>
+                <parameter name="destination">
+                    <description><![CDATA[The destination the message belongs to.]]></description>
+                </parameter>
+                <parameter name="headers">
+                    <description><![CDATA[The headers of the message.]]></description>
+                </parameter>
+                <parameter name="properties">
+                    <description><![CDATA[The properties of the message.]]></description>
+                </parameter>
+                <parameter name="messageId">
+                    <description><![CDATA[The ID of the message.]]></description>
+                </parameter>
+                <parameter name="deliveryCount">
+                    <description><![CDATA[The number of times the message was delivered.]]></description>
+                </parameter>
+                <parameter name="contentType">
+                    <description><![CDATA[The content type of the message body]]></description>
+                </parameter>
+                <parameter name="ackToken">
+                    <description><![CDATA[The acknowledgement token of the message, passed to Ack/Nack operations to perform ack/nack manually.
+ This token will be present only when MANUAL ACK mode is used.]]></description>
+                </parameter>
+            </parameters>
+        </type>
+        <type name="com.mulesoft.extension.mq.api.attributes.AnypointMQMessagePublishAttributes">
+            <description><![CDATA[Provides metadata regarding a published message.]]></description>
+            <parameters>
+                <parameter name="messageId">
+                    <description><![CDATA[The ID of the message that was published.]]></description>
+                </parameter>
+            </parameters>
+        </type>
+        <type name="com.mulesoft.extension.mq.api.circuit.CircuitBreakerConfiguration">
+            <description><![CDATA[Contains all the configuration parameters that will configure an MQCircuitBreaker
+
+ @since 2.1.0]]></description>
+            <parameters>
+                <parameter name="onErrorTypes">
+                    <description><![CDATA[The error types whose occurrence during the flow execution will count as a failure in the circuit.
+ Error counts only when the flow is completed with an error propagation.
+ By default all the errors will count as a failure.]]></description>
+                </parameter>
+                <parameter name="errorsThreshold">
+                    <description><![CDATA[How many errors, of those considered by this circuit, have to occur for the circuit to be opened.]]></description>
+                </parameter>
+                <parameter name="tripTimeout">
+                    <description><![CDATA[How long will the circuit remain open once the errorsThreshold is reached]]></description>
+                </parameter>
+                <parameter name="tripTimeoutUnit">
+                    <description><![CDATA[The time unit bound to the tripTimeout]]></description>
+                </parameter>
+            </parameters>
+        </type>
+        <type name="com.mulesoft.extension.mq.api.source.PollingTypeSubscriberFactory">
+            <description><![CDATA[polling subscribers]]></description>
+            <parameters>
+                <parameter name="fetchSize">
+                    <description><![CDATA[The maximum amount of messages to be fetched on each polling execution.
+ Fewer messages could be received when the target Queue contains a low amount of messages.
+ Valid range is from 1 to 10 messages]]></description>
+                </parameter>
+                <parameter name="schedulingStrategy">
+                    <description><![CDATA[The scheduling strategy to be used for triggering the message fetch from the service.]]></description>
+                </parameter>
+            </parameters>
+        </type>
+        <type name="com.mulesoft.extension.mq.api.source.PrefetchTypeSubscriberFactory">
+            <description><![CDATA[prefetch subscribers]]></description>
+            <parameters>
+                <parameter name="maxLocalMessages">
+                    <description><![CDATA[The maximum number of messages to be pre-fetched from the service and kept locally before dispatching to the flow.]]></description>
+                </parameter>
+            </parameters>
+        </type>
+        <type name="com.mulesoft.extension.mq.api.source.SubscriberFactory">
+            <description><![CDATA[Generic factory pattern for creating MQSubscriber instances]]></description>
+            <parameters/>
+        </type>
+        <type name="com.mulesoft.mq.restclient.client.mq.domain.AnypointMQMessage">
+            <description><![CDATA[]]></description>
+            <parameters/>
+        </type>
+    </types>
+</extension-documentation>

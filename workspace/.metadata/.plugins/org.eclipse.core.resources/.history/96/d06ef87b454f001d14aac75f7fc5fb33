@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<sub-flow name="sf-elasticsearch-client-products-get" doc:id="b0640eb2-bcd4-4924-9c3a-af8ce7d91bae" >
+		<until-successful maxRetries="3" doc:name="Until Successful" doc:id="7ad6bb70-2409-4d27-b9d1-e87de175d95f" millisBetweenRetries="1000">
+			<try doc:name="Try" doc:id="c255fc34-89e4-47ef-87be-97f50be8510e" >
+				<http:request method="GET" doc:name="Request" doc:id="e98029e7-a736-47e0-a99f-43b6e00d5f02" config-ref="HTTP_Request_configuration_elasticsearch" path="/products">
+					<http:response-validator >
+						<http:success-status-code-validator values="200" />
+					</http:response-validator>
+				</http:request>
+				<error-handler >
+					<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="27fa6ab0-d508-42e7-90e0-a20edbe8691e" type="CONNECTIVITY"/>
+				</error-handler>
+			</try>
+		</until-successful>
+	</sub-flow>
+</mule>

@@ -1,0 +1,24 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize' : '50px', 'fontFamily' : 'Helvetica', 'noteBorderColor' : '#4D829E','noteBkgColor' : '#FFFFFF', 'noteTextColor' : '#827b77', 'labelTextColor' : '#827b77','actorBkg': '#ffffff', 'actorBorder' : '#009edb', 'actorTextColor' : '#827b77', 'activationBkgColor' : '#009edb', 'activationBorderColor' : '#827b77', 'signalColor' : '#827b77', 'signalTextColor' : '#827b77', 'loopTextColor' : '#827b77'}}}%%
+sequenceDiagram
+    autonumber
+
+    participant queue as Products managment queue
+    participant products_API as products API
+    participant MongoDBAPI as MongoDB API
+    participant MongoDB as MongoDB
+    participant eslasticsearchAPI as Elastic Search API
+    participant elasticSearch as Elastic Search
+
+        queue -->>+ products_API : consume [product]
+        par Store in MDM
+            products_API->>+MongoDBAPI: http /products[POST]<br>[Product]
+            MongoDBAPI ->>+ MongoDB: Insert operation
+            MongoDB -->>- MongoDBAPI: Operation response [Success]
+            MongoDBAPI -->>- products_API: Status code 201 
+        and Store in ES
+            products_API->>+eslasticsearchAPI: http /products[POST]<br>[Product]
+            eslasticsearchAPI ->>+ elasticSearch: Insert operation
+            elasticSearch -->>- eslasticsearchAPI: Operation response [Success]
+            eslasticsearchAPI -->>- products_API: Status code 201 
+        end
+        products_API -->>- queue : ACK
