@@ -1,7 +1,0 @@
-elastic-search:
-  host: "localhost"
-  port: "3000"
-  basepath: "/acme-elasticsearch-v1"
-  resources:
-    products: "/products"
-    
