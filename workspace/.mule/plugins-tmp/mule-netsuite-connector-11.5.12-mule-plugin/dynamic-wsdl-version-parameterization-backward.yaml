@@ -1,3 +1,0 @@
-backward-compatibility-validation:
-  wsdl-version-in-payload: "_2020_2"
-  config-name: "tokenConfig"
